@@ -1,0 +1,33 @@
+services:
+  postgres:
+    image: postgres
+    container_name: adonis_postgres
+    environment:
+      POSTGRES_USER: adonis_user
+      POSTGRES_PASSWORD: adonis_password
+      POSTGRES_DB: adonis_db
+    ports:
+      - "5433:5432"
+    networks:
+      - adonis_network
+
+  app:
+    image: node:16
+    container_name: adonis_app
+    environment:
+      DB_CONNECTION: pg
+      DB_HOST: postgres  # Este é o nome do serviço do PostgreSQL
+      DB_PORT: 5432
+      DB_USER: adonis_user
+      DB_PASSWORD: adonis_password
+      DB_DATABASE: adonis_db
+    networks:
+      - adonis_network
+    depends_on:
+      - postgres
+    volumes:
+      - .:/app
+
+networks:
+  adonis_network:
+    driver: bridge
