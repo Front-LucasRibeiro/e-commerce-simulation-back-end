@@ -1,7 +1,7 @@
 import { DateTime } from 'luxon'
 import { BaseModel, column, hasMany } from '@adonisjs/lucid/orm'
-import CartItem from './cart_item.js'
 import * as relations from '@adonisjs/lucid/types/relations'
+import CartItem from './cart_item.js'
 
 export default class Cart extends BaseModel {
   @column({ isPrimary: true })
@@ -11,7 +11,7 @@ export default class Cart extends BaseModel {
   public userId!: number
 
   @column()
-  public totalPrice: number = 0 // Preço total dos itens no carrinho
+  public totalPrice: number = 0
 
   @column()
   public status: string = 'active' // Status do carrinho (ativo, finalizado)

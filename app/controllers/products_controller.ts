@@ -1,8 +1,6 @@
 import Product from '#models/product'
 import type { HttpContext } from '@adonisjs/core/http'
 
-
-
 export default class ProductController {
   public async products({ response }: HttpContext) {
     try {
