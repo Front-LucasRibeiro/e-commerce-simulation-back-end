@@ -28,10 +28,21 @@ router
       return controllerInstance.addItems(ctx) // Chama o método 'getItems'
     })
 
-    router.delete('cart/:id/item', async (ctx) => {
+    router.delete('cart/:cartId/item/:itemId', async (ctx) => {
       const Controller = await CartController()
       const controllerInstance = new Controller()
-      return controllerInstance.removeItemCart(ctx) // Chama o método 'removeItemCart'
+      try {
+        return await controllerInstance.removeItemCart(ctx) // Chama o método 'removeItemCart'
+      } catch (error) {
+        ctx.response.status(400).send({ message: error.message }) // Retorna uma mensagem de erro
+      }
+    })
+
+    // Nova rota para atualizar a quantidade de um item
+    router.put('cart/:id/item', async (ctx) => {
+      const Controller = await CartController()
+      const controllerInstance = new Controller()
+      return controllerInstance.updateItemQuantity(ctx) // Chama o novo método
     })
 
     // Rotas para os produtos
