@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-shadow */
 import 'reflect-metadata'
 import { Ignitor, prettyPrintError } from '@adonisjs/core'
 import { createServer, Server, IncomingMessage, ServerResponse } from 'node:http'
@@ -16,7 +17,6 @@ const startServer = async () => {
     const ignitor = new Ignitor(APP_ROOT, { importer: IMPORTER })
 
     const app = await ignitor
-      // eslint-disable-next-line @typescript-eslint/no-shadow
       .tap((app) => {
         app.booting(async () => {
           await import('#start/env')
@@ -27,7 +27,7 @@ const startServer = async () => {
       .httpServer()
 
     const port = process.env.PORT ? Number.parseInt(process.env.PORT, 10) : 3333
-    const host = process.env.HOST || '0.0.0.0'
+    const host = '0.0.0.0' // Bind to all available network interfaces
 
     try {
       await app.start((handler: (req: IncomingMessage, res: ServerResponse) => void) => {
