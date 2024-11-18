@@ -1,5 +1,6 @@
 import 'reflect-metadata'
 import { Ignitor, prettyPrintError } from '@adonisjs/core'
+import { Env } from '@adonisjs/core/env'
 
 const APP_ROOT = new URL('../', import.meta.url)
 
