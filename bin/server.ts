@@ -25,15 +25,11 @@ const startServer = async () => {
       })
       .httpServer()
 
-    const port = process.env.PORT || 3333
-    const host = process.env.HOST || '0.0.0.0'
+    const port = Number(process.env.PORT) || 3333
 
-    await app.start({
-      port: Number(port),
-      host: Number(host),
-    })
+    await app.start()
 
-    console.log(`Server started on http://${host}:${port}`)
+    console.log(`Server started on http://:${port}`)
   } catch (error) {
     process.exitCode = 1
     prettyPrintError(error)
